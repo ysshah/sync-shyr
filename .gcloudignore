@@ -1,0 +1,6 @@
+.gcloudignore
+.git
+.github
+.python-version
+.vscode
+__pycache__
