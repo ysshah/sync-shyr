@@ -1,9 +1,8 @@
 from os import environ
 
 from googleapiclient.discovery import build
+import google.auth
 import pandas as pd
-
-from auth import credentials
 
 COLUMNS = [
     'Name', 'Count', 'Price', 'SKU', 'Vintage', 'Winery', 'Country', 'Region', 'Appellation',
@@ -11,6 +10,8 @@ COLUMNS = [
     'WW', 'No-Adv'
 ]
 
+credentials, project_id = google.auth.default(
+    scopes=['https://www.googleapis.com/auth/spreadsheets.readonly'])
 service = build('sheets', 'v4', credentials=credentials)
 
 def read():

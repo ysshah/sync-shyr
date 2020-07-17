@@ -3,14 +3,15 @@ from os import environ
 
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
-
-from auth import credentials
+import google.auth
 
 # https://developers.google.com/drive/api/v3/search-files#query_string_examples
 QUERY = "'{}' in parents and mimeType = '{}'"
 FACTSHEETS_QUERY = QUERY.format(environ['FACT_SHEETS_FOLDER_ID'], 'application/pdf')
 IMAGES_QUERY = QUERY.format(environ['IMAGES_FOLDER_ID'], 'image/jpeg')
 
+credentials, project_id = google.auth.default(
+    scopes=['https://www.googleapis.com/auth/drive.readonly'])
 service = build('drive', 'v3', credentials=credentials)
 
 def list_images():
